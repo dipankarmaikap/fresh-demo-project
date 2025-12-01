@@ -1,4 +1,4 @@
-import { App, staticFiles } from "fresh";
+import { App, Context, staticFiles } from "fresh";
 import { define, type State } from "./utils.ts";
 
 export const app = new App<State>();
@@ -12,7 +12,7 @@ app.use(async (ctx) => {
 });
 
 // this is the same as the /api/:name route defined via a file. feel free to delete this!
-app.get("/api2/:name", (ctx) => {
+app.get("/api2/:name", (ctx: Context<State>) => {
   const name = ctx.params.name;
   return new Response(
     `Hello, ${name.charAt(0).toUpperCase() + name.slice(1)}!`,
